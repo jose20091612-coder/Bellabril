@@ -96,7 +96,7 @@ const PRODUCTS = [
     nombre:      "Crema Extra Ácida Colormaster — Fidelité",
     precio:      5500,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite.jpg",
+    imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite-5500.jpg",
     descripcion: "Crema extra ácida de la línea Color Care System de Fidelité, formulada con D-Panthenol para sellar la fibra capilar luego de la coloración. Ayuda a cerrar la cutícula del cabello, cuidando el color y dejándolo con mejor aspecto después del proceso químico.",
     caracteristicas: [
       "Sella la fibra capilar post-coloración",
@@ -114,7 +114,7 @@ const PRODUCTS = [
     nombre:      "Shampoo Mythical Argán — Fidelité",
     precio:      8000,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/shampoo-mythical-argan-fidelite.jpg",
+    imagen:      "assets/productos/cabello/shampoo-mythical-argan-fidelite-8000.jpg",
     descripcion: "Shampoo profesional de la línea Mythical de Fidelité, formulado con aceite virgen de argán y filtro UV. Limpia suavemente mientras nutre el cabello, dejándolo con brillo y suavidad.",
     caracteristicas: [
       "Formulado con aceite virgen de argán",
@@ -132,7 +132,7 @@ const PRODUCTS = [
     nombre:      "Acondicionador Mythical Argán — Fidelité",
     precio:      8000,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite.jpg",
+    imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite-8000.jpg",
     descripcion: "Acondicionador profesional de la línea Mythical de Fidelité, con aceite virgen de argán y filtro UV. Facilita el desenredado y deja el cabello suave, hidratado y con brillo.",
     caracteristicas: [
       "Formulado con aceite virgen de argán",
@@ -150,7 +150,7 @@ const PRODUCTS = [
     nombre:      "Ampollas Capilares — Fidelité",
     precio:      2000,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    imagen:      "assets/productos/cabello/ampollas-varias-2000.jpeg",
     descripcion: "Ampollas capilares de la línea Fidelité. Aportan brillo, nutrición y revitalizan el cabello en cada aplicación. Disponibles en 5 variantes según lo que necesite tu cabello.",
     caracteristicas: [
       "Linen Seed: ayuda a disciplinar y suavizar el cabello, aportando brillo y controlando el frizz",
@@ -158,6 +158,57 @@ const PRODUCTS = [
       "Caviar: acción regeneradora intensiva que revitaliza el cabello dañado y devuelve firmeza y brillo",
       "Argán: complejo de argán que aporta brillo, nutrición y revitaliza el cabello",
       "Instant Nourishing Complex: nutrición instantánea, ideal para un efecto rápido de brillo y suavidad"
+    ],
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 11,
+    nombre:      "Desenredante Instantáneo — Fidelité",
+    precio:      12000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/desenredante-instantaneo-fidelite-12.000.jpeg",
+    descripcion: "Acondicionador desenredante instantáneo bifásico de Fidelité, con keratina. Controla el frizz y aporta brillo desde la primera aplicación.",
+    caracteristicas: [
+      "Fórmula bifásica (2 Phase Instant Conditioner)",
+      "Con keratina",
+      "Controla el frizz y aporta brillo",
+      "Bonus Pack: 25% de producto extra",
+      "Línea profesional Fidelité"
+    ],
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 12,
+    nombre:      "Máscaras Capilares — Fidelité",
+    precio:      12000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/mascaras-capilares-varias-12.000.jpeg",
+    descripcion: "Máscaras capilares profesionales de Fidelité, especiales para cabello seco y maltratado. Disponibles en 3 variantes según lo que necesite tu cabello.",
+    caracteristicas: [
+      "Argán Mythical Hair Mask: tratamiento intensivo con argán para cabello dañado",
+      "100% Free: fórmula libre de sulfatos, parabenos y siliconas",
+      "Kill Frizz: controla el frizz y mantiene el cabello bajo control"
+    ],
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 13,
+    nombre:      "Sérum Reparadores — Fidelité",
+    precio:      12000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/serum-reparadores-12.000.jpeg",
+    descripcion: "Sérum reparador de puntas de Fidelité, con filtro UV. Reduce el frizz y previene las puntas abiertas. Disponible en 2 variantes según la densidad del cabello.",
+    caracteristicas: [
+      "Con semillas de girasol: alta densidad, brillo instantáneo, anti-frizz y anti-age",
+      "Con semillas de lino: densidad media, brillo instantáneo, anti-frizz y anti-age",
+      "Filtro UV",
+      "Contenido: 30ml / 1.01 fl oz"
     ],
     nuevo:       false,
     destacado:   false,
