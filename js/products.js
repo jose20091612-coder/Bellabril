@@ -91,6 +91,39 @@ const PRODUCTS = [
     destacado:   false,
     stock:       false
   },
+  {
+    id: 7,
+    nombre:      "Crema Extra Ácida Colormaster — Fidelité",
+    precio:      5500,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite.jpg",
+    descripcion: "Crema extra ácida de la línea Color Care System de Fidelité, formulada con D-Panthenol para sellar la fibra capilar luego de la coloración. Ayuda a cerrar la cutícula del cabello, cuidando el color y dejándolo con mejor aspecto después del proceso químico.",
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 8,
+    nombre:      "Shampoo Mythical Argán — Fidelité",
+    precio:      8000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/shampoo-mythical-argan-fidelite.jpg",
+    descripcion: "Shampoo profesional de la línea Mythical de Fidelité, formulado con aceite virgen de argán y filtro UV. Limpia suavemente mientras nutre el cabello, dejándolo con brillo y suavidad.",
+    nuevo:       false,
+    destacado:   true,
+    stock:       true
+  },
+  {
+    id: 9,
+    nombre:      "Acondicionador Mythical Argán — Fidelité",
+    precio:      8000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite.jpg",
+    descripcion: "Acondicionador profesional de la línea Mythical de Fidelité, con aceite virgen de argán y filtro UV. Facilita el desenredado y deja el cabello suave, hidratado y con brillo.",
+    nuevo:       false,
+    destacado:   true,
+    stock:       true
+  },
 ];
 
 /* ================================================================
