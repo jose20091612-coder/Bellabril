@@ -147,55 +147,18 @@ const PRODUCTS = [
   },
   {
     id: 10,
-    nombre:      "Ampolla Capilar Linen Seed — Fidelité",
+    nombre:      "Ampollas Capilares — Fidelité",
     precio:      2000,
     categoria:   "cabello",
     imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
-    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
-    nuevo:       false,
-    destacado:   false,
-    stock:       true
-  },
-  {
-    id: 11,
-    nombre:      "Ampolla Capilar 100% Free — Fidelité",
-    precio:      2000,
-    categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
-    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
-    nuevo:       false,
-    destacado:   false,
-    stock:       true
-  },
-  {
-    id: 12,
-    nombre:      "Ampolla Capilar Caviar — Fidelité",
-    precio:      2000,
-    categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
-    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
-    nuevo:       false,
-    destacado:   false,
-    stock:       true
-  },
-  {
-    id: 13,
-    nombre:      "Ampolla Capilar Argán — Fidelité",
-    precio:      2000,
-    categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
-    descripcion: "Ampolla capilar de la línea Fidelité con complejo de argán, que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
-    nuevo:       false,
-    destacado:   false,
-    stock:       true
-  },
-  {
-    id: 14,
-    nombre:      "Ampolla Capilar Instant Nourishing Complex — Fidelité",
-    precio:      2000,
-    categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
-    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    descripcion: "Ampollas capilares de la línea Fidelité. Aportan brillo, nutrición y revitalizan el cabello en cada aplicación. Disponibles en 5 variantes según lo que necesite tu cabello.",
+    caracteristicas: [
+      "Linen Seed: ayuda a disciplinar y suavizar el cabello, aportando brillo y controlando el frizz",
+      "100% Free: fórmula libre de agregados agresivos, nutre e hidrata sin pesar el cabello",
+      "Caviar: acción regeneradora intensiva que revitaliza el cabello dañado y devuelve firmeza y brillo",
+      "Argán: complejo de argán que aporta brillo, nutrición y revitaliza el cabello",
+      "Instant Nourishing Complex: nutrición instantánea, ideal para un efecto rápido de brillo y suavidad"
+    ],
     nuevo:       false,
     destacado:   false,
     stock:       true
