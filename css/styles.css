@@ -484,13 +484,34 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .page-header p { opacity: 0.84; }
 
 /* ── FILTER BAR ──────────────────────────────── */
-.filter-bar { padding: 22px 0; border-bottom: 1px solid var(--border); margin-bottom: 36px; display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-bar {
+  padding: 22px 0; border-bottom: 1px solid var(--border); margin-bottom: 36px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+}
+.filter-bar__cats { display: flex; gap: 8px; flex-wrap: wrap; }
 .filter-btn {
   padding: 7px 18px; border-radius: var(--radius-pill); border: 2px solid var(--border);
   background: var(--bg); font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem;
   color: var(--text-medium); cursor: pointer; transition: all var(--transition);
 }
 .filter-btn:hover, .filter-btn.active { background: var(--gradient); color: white; border-color: transparent; box-shadow: 0 4px 12px rgba(232,65,106,0.28); }
+
+/* ── SORT SELECT ─────────────────────────────── */
+.sort-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.sort-wrap label { font-size: 0.78rem; font-weight: 700; color: var(--text-medium); white-space: nowrap; }
+.sort-select-box { position: relative; }
+.sort-select-box::after {
+  content: ''; position: absolute; right: 14px; top: 50%; width: 8px; height: 8px;
+  border-right: 2px solid var(--purple); border-bottom: 2px solid var(--purple);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+.sort-select {
+  appearance: none; -webkit-appearance: none;
+  padding: 9px 36px 9px 16px; border-radius: var(--radius-pill); border: 2px solid var(--border);
+  background: var(--bg); font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem;
+  color: var(--purple); cursor: pointer; transition: all var(--transition);
+}
+.sort-select:hover, .sort-select:focus { border-color: var(--purple-light); outline: none; }
 
 /* scroll reveal desactivado */
 .reveal { opacity: 1; transform: none; }

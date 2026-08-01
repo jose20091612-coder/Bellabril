@@ -61,14 +61,22 @@
 <!-- CATALOG -->
 <main style="padding:60px 0">
   <div class="container">
-    <div class="filter-bar">
-      <button class="filter-btn" data-cat="todos">Todos</button>
-      <button class="filter-btn" data-cat="esmaltes">💅 Esmaltes</button>
-      <button class="filter-btn" data-cat="geles">✨ Geles</button>
-      <button class="filter-btn" data-cat="acrilicos">💎 Acrílicos</button>
-      <button class="filter-btn" data-cat="decoracion">🌷 Decoración</button>
-      <button class="filter-btn" data-cat="herramientas">🔧 Herramientas</button>
-      <button class="filter-btn" data-cat="kits">🎁 Kits</button>
+    <div class="filter-bar" style="justify-content:flex-end">
+      <div class="sort-wrap">
+        <label for="sortSelect">Ordenar por</label>
+        <div class="sort-select-box">
+          <select class="sort-select" id="sortSelect">
+            <option value="destacado">Destacado</option>
+            <option value="precio-asc">Precio: menor a mayor</option>
+            <option value="precio-desc">Precio: mayor a menor</option>
+            <option value="az">A - Z</option>
+            <option value="za">Z - A</option>
+            <option value="nuevo">Más nuevo al más viejo</option>
+            <option value="viejo">Más viejo al más nuevo</option>
+            <option value="vendidos">Más vendidos</option>
+          </select>
+        </div>
+      </div>
     </div>
     <div class="products-grid" id="productsGrid"></div>
   </div>

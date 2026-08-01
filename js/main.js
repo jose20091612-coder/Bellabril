@@ -52,23 +52,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ── Productos.html: filter buttons ── */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  if (filterBtns.length) {
+  /* ── Productos.html: filtro por categoría (vía ?cat=) + orden ── */
+  const productsGrid = document.getElementById('productsGrid');
+  const sortSelect    = document.getElementById('sortSelect');
+  if (productsGrid) {
     const params = new URLSearchParams(location.search);
     let active = params.get('cat') || 'todos';
+    let sort   = params.get('sort') || 'destacado';
+    if (sortSelect) sortSelect.value = sort;
 
-    function applyFilter(cat) {
-      active = cat;
-      filterBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
-      renderProducts('productsGrid', cat);
+    function applySort(value) {
+      sort = value;
+      renderProducts('productsGrid', active, null, sort);
       const url = new URL(location);
-      url.searchParams.set('cat', cat);
+      url.searchParams.set('sort', sort);
       history.replaceState({}, '', url);
     }
 
-    filterBtns.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.cat)));
-    applyFilter(active);
+    if (sortSelect) sortSelect.addEventListener('change', () => applySort(sortSelect.value));
+    renderProducts('productsGrid', active, null, sort);
   }
 
   /* ── Checkout: payment method toggle ── */
