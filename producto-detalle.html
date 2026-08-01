@@ -65,7 +65,7 @@
       <div class="pd-image-wrap">
         <span class="product-card__badge badge-nuevo pd-badge" id="pdBadgeNuevo" style="display:none">Nuevo ✦</span>
         <span class="product-card__badge badge-agotado pd-badge" id="pdBadgeAgotado" style="display:none">Sin stock</span>
-        <img class="pd-image" id="pdImg" src="" alt="" onerror="this.style.opacity=0">
+        <img class="pd-image" id="pdImg" alt="" onerror="this.style.opacity=0">
       </div>
 
       <div class="pd-info">
@@ -175,8 +175,10 @@
   const catInfo = CATEGORIAS.find(c => c.id === p.categoria);
   const catNombre = catInfo ? catInfo.nombre : p.categoria;
 
-  document.getElementById('pdImg').src = p.imagen;
-  document.getElementById('pdImg').alt = p.nombre;
+  const pdImg = document.getElementById('pdImg');
+  pdImg.style.opacity = '';
+  pdImg.src = p.imagen;
+  pdImg.alt = p.nombre;
   document.getElementById('pdName').textContent  = p.nombre;
   document.getElementById('pdPrice').textContent = Cart.formatPrice(p.precio);
   document.getElementById('pdDesc').textContent  = p.descripcion;

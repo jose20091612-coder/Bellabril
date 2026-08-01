@@ -61,6 +61,30 @@ document.addEventListener('DOMContentLoaded', () => {
     let sort   = params.get('sort') || 'destacado';
     if (sortSelect) sortSelect.value = sort;
 
+    const PAGE_COPY = {
+      todos:       { title: 'Nuestros Productos',  subtitle: 'Todo lo que necesitás para crear uñas increíbles' },
+      novedades:   { title: 'Novedades',            subtitle: 'Los productos más destacados y recién llegados de nuestra tienda' },
+      skincare:    { title: 'Skincare',             subtitle: 'Los mejores productos para el cuidado de tu piel y tu rostro' },
+      maquillaje:  { title: 'Maquillaje',           subtitle: 'Bases, labiales y mucho más para realzar tu belleza' },
+      cabello:     { title: 'Cabello',              subtitle: 'Shampoo, tratamientos y productos profesionales para tu cabello' },
+      unas:        { title: 'Uñas',                 subtitle: 'Todo lo que necesitás para crear uñas increíbles' },
+      pestanas:    { title: 'Pestañas y cejas',     subtitle: 'Productos profesionales para pestañas y cejas perfectas' },
+      perfumeria:  { title: 'Perfumería',           subtitle: 'Fragancias para cada ocasión' },
+    };
+    function updatePageHeader(cat) {
+      const titleEl = document.getElementById('pageTitle');
+      const subEl   = document.getElementById('pageSubtitle');
+      if (!titleEl || !subEl) return;
+      if (PAGE_COPY[cat]) {
+        titleEl.textContent = PAGE_COPY[cat].title;
+        subEl.textContent   = PAGE_COPY[cat].subtitle;
+      } else {
+        const catInfo = typeof CATEGORIAS !== 'undefined' ? CATEGORIAS.find(c => c.id === cat) : null;
+        titleEl.textContent = catInfo ? catInfo.nombre : 'Nuestros Productos';
+        subEl.textContent   = 'Todo lo que necesitás para crear uñas increíbles';
+      }
+    }
+
     function applySort(value) {
       sort = value;
       renderProducts('productsGrid', active, null, sort);
@@ -70,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (sortSelect) sortSelect.addEventListener('change', () => applySort(sortSelect.value));
+    updatePageHeader(active);
     renderProducts('productsGrid', active, null, sort);
   }
 

@@ -258,7 +258,10 @@ function sortProducts(list, sort = 'destacado') {
 function renderProducts(containerId, filter = 'todos', limit = null, sort = 'destacado') {
   const el = document.getElementById(containerId);
   if (!el) return;
-  let list = filter === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.categoria === filter);
+  let list;
+  if (filter === 'todos')          list = PRODUCTS;
+  else if (filter === 'novedades') list = PRODUCTS.filter(p => p.nuevo);
+  else                              list = PRODUCTS.filter(p => p.categoria === filter);
   list = sortProducts(list, sort);
   if (limit) list = list.slice(0, limit);
   el.innerHTML = list.length
