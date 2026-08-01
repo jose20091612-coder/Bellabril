@@ -543,10 +543,27 @@ function addToCart(id) {
   if (p && p.stock) Cart.add(p);
 }
 
-function renderProducts(containerId, filter = 'todos', limit = null) {
+function sortProducts(list, sort = 'destacado') {
+  const sorted = list.slice();
+  switch (sort) {
+    case 'precio-asc':  return sorted.sort((a, b) => a.precio - b.precio);
+    case 'precio-desc': return sorted.sort((a, b) => b.precio - a.precio);
+    case 'az':           return sorted.sort((a, b) => a.nombre.localeCompare(b.nombre, 'es'));
+    case 'za':           return sorted.sort((a, b) => b.nombre.localeCompare(a.nombre, 'es'));
+    case 'nuevo':         return sorted.sort((a, b) => b.id - a.id);
+    case 'viejo':         return sorted.sort((a, b) => a.id - b.id);
+    case 'vendidos':
+    case 'destacado':
+    default:
+      return sorted.sort((a, b) => (b.destacado === true) - (a.destacado === true));
+  }
+}
+
+function renderProducts(containerId, filter = 'todos', limit = null, sort = 'destacado') {
   const el = document.getElementById(containerId);
   if (!el) return;
   let list = filter === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.categoria === filter);
+  list = sortProducts(list, sort);
   if (limit) list = list.slice(0, limit);
   el.innerHTML = list.length
     ? list.map(_cardHTML).join('')

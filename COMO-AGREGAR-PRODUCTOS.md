@@ -1,59 +1,60 @@
 # Cómo agregar productos a Bellabril
 
+La forma más fácil es usando el **panel de administración** (`admin.html`). No hace falta tocar código.
+
+---
+
 ## Paso 1 — Guardá la foto del producto
 
-Copiá la imagen del producto en la carpeta correspondiente:
+Copiá la imagen dentro de `assets/productos/`, en la carpeta de su categoría:
 
 ```
 assets/productos/
-├── esmaltes/       ← fotos de esmaltes acá
-├── geles/          ← fotos de geles acá
-├── acrilicos/      ← fotos de acrílicos acá
-├── decoracion/     ← fotos de decoración acá
-├── herramientas/   ← fotos de herramientas acá
-└── kits/           ← fotos de kits acá
+├── skincare/     ← cremas, sérums, limpiadores...
+├── maquillaje/   ← bases, labiales, sombras...
+├── cabello/      ← shampoo, tratamientos...
+├── unas/         ← esmaltes, geles, acrílicos...
+├── pestanas/     ← pestañas, cejas, lash lift...
+└── perfumeria/   ← perfumes y fragancias
 ```
 
 **Recomendación para las fotos:**
 - Formato: JPG o PNG
 - Tamaño: cuadrada (1:1), mínimo 600×600 px
-- Nombre: sin espacios ni mayúsculas, ej: `rosa-nude.jpg`, `gel-constructor.jpg`
+- Nombre: sin espacios ni mayúsculas, ej: `rosa-nude.jpg`, `serum-vitamina-c.jpg`
 
 ---
 
-## Paso 2 — Abrí el archivo de productos
+## Paso 2 — Abrí el panel de administración
 
-Abrí el archivo: `js/products.js`
-
----
-
-## Paso 3 — Copiá este bloque y completalo
-
-```javascript
-{
-  id:          7,                              // número único, siempre mayor al último
-  nombre:      "Nombre del producto",          // nombre tal como se va a mostrar
-  precio:      0000,                           // precio en pesos ARS (solo números)
-  categoria:   "esmaltes",                     // esmaltes | geles | acrilicos | decoracion | herramientas | kits
-  imagen:      "assets/productos/esmaltes/nombre-foto.jpg",
-  descripcion: "Descripción breve del producto.",
-  nuevo:       false,   // true = aparece en "Nuevos ingresos" en el home
-  destacado:   false,   // true = aparece en "Favoritos" en el home
-  stock:       true     // false = muestra "Sin stock" y desactiva el botón
-},
-```
-
-Pegalo dentro del array `PRODUCTS`, después del último producto (antes del `]`).
+1. Abrí `admin.html` en el navegador (doble clic, o con Live Server).
+2. Ingresá la contraseña: `bellabril2024` (podés cambiarla buscando `const PWD` dentro de `admin.html`).
 
 ---
 
-## Paso 4 — Guardá el archivo
+## Paso 3 — Cargá el producto
 
-Listo. El sitio se actualiza automáticamente con el nuevo producto.
+1. Clic en **"+ Agregar producto"**.
+2. Completá nombre, precio, categoría (elegí una de las 6 reales: Skincare, Maquillaje, Cabello, Uñas, Pestañas y cejas, Perfumería), la ruta de la imagen que guardaste en el Paso 1 (ej: `assets/productos/skincare/serum-vitamina-c.jpg`) y una descripción breve.
+3. Marcá si es **Destacado** (aparece en "Favoritos" del inicio) y/o **Nuevo ingreso** (aparece en "Nuevos ingresos" del inicio).
+4. Guardar.
+
+Repetí para cada producto. Podés editar o eliminar cualquiera desde la tabla.
 
 ---
 
-## Datos que necesitás completar (una sola vez)
+## Paso 4 — Publicá los cambios en la web
+
+El panel guarda los productos en tu navegador mientras cargás, pero **el sitio online no se actualiza solo** — hay que exportar y subir:
+
+1. Andá a la pestaña **"Exportar"** del panel.
+2. Clic en **"Descargar products.js"**.
+3. Reemplazá el archivo `js/products.js` de la carpeta del proyecto por el que acabás de descargar.
+4. Avisame ("hacé los cambios") y yo me encargo de subirlo a GitHub — Netlify lo publica solo en unos minutos.
+
+---
+
+## Datos que todavía hay que revisar (una sola vez)
 
 Buscá los comentarios `<!-- REVISAR -->` en los archivos HTML y completá:
 
@@ -72,9 +73,9 @@ Ejemplo: número `011 1534-5678` → en el código va `5491115345678`
 
 ---
 
-## Cómo previsualizar el sitio
+## Cómo previsualizar el sitio antes de subirlo
 
 1. Abrí VS Code
 2. Instalá la extensión **Live Server** (si no la tenés)
-3. Hacé clic derecho en `index.html` → **Open with Live Server**
+3. Clic derecho en `index.html` → **Open with Live Server**
 4. El sitio se abre en tu navegador en `http://127.0.0.1:5500`
