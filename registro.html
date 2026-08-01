@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear cuenta — Bellabril</title>
+  <link rel="icon" href="assets/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--bg-light); }
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px; background: white; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+    }
+    .top-bar img { height: 38px; }
+    .top-bar a { font-size: 0.85rem; font-weight: 700; color: var(--purple); }
+    .top-bar a:hover { color: var(--pink); }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html"><img src="assets/logo.png" alt="Bellabril"></a>
+  <a href="index.html">← Volver a la tienda</a>
+</div>
+
+<main class="auth-page" style="padding-top:100px">
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      <img src="assets/logo.png" alt="Bellabril">
+    </div>
+
+    <h1 class="auth-title">Crear cuenta</h1>
+    <p class="auth-subtitle">Renacé tu belleza con Bellabril ✦</p>
+
+    <div class="alert-error"   id="alertError"></div>
+    <div class="alert-success" id="alertSuccess"></div>
+
+    <form id="registroForm" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="nombre">Nombre completo *</label>
+        <input class="form-input" type="text" id="nombre" name="nombre" required placeholder="Ej: Ana García" autocomplete="name">
+        <p class="field-error" id="nombreErr">Ingresá tu nombre.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email *</label>
+        <input class="form-input" type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email">
+        <p class="field-error" id="emailErr">Ingresá un email válido.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="telefono">Teléfono / WhatsApp</label>
+        <input class="form-input" type="tel" id="telefono" name="telefono" placeholder="11 1234-5678" autocomplete="tel">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Contraseña *</label>
+        <div class="password-wrap">
+          <input class="form-input" type="password" id="password" name="password" required placeholder="Mínimo 6 caracteres" autocomplete="new-password">
+          <button type="button" class="toggle-pwd" onclick="togglePwd('password')" aria-label="Ver contraseña">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="field-error" id="pwdErr">La contraseña debe tener al menos 6 caracteres.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="confirm">Repetir contraseña *</label>
+        <div class="password-wrap">
+          <input class="form-input" type="password" id="confirm" name="confirm" required placeholder="Repetí tu contraseña" autocomplete="new-password">
+          <button type="button" class="toggle-pwd" onclick="togglePwd('confirm')" aria-label="Ver contraseña">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="field-error" id="confirmErr">Las contraseñas no coinciden.</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="submitBtn" style="margin-top:8px">
+        Crear mi cuenta
+      </button>
+
+    </form>
+
+    <div class="auth-divider"><span>¿Ya tenés cuenta?</span></div>
+
+    <a href="login.html" class="btn btn-outline btn-full">Iniciar sesión</a>
+
+  </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+  if (Auth.isLoggedIn()) location.href = 'index.html';
+
+  function togglePwd(id) {
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+
+  document.getElementById('registroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const nombre   = document.getElementById('nombre').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const password = document.getElementById('password').value;
+    const confirm  = document.getElementById('confirm').value;
+    const alertErr = document.getElementById('alertError');
+
+    let valid = true;
+
+    if (!nombre) {
+      document.getElementById('nombreErr').classList.add('show'); valid = false;
+    } else { document.getElementById('nombreErr').classList.remove('show'); }
+
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailErr').classList.add('show'); valid = false;
+    } else { document.getElementById('emailErr').classList.remove('show'); }
+
+    if (password.length < 6) {
+      document.getElementById('pwdErr').classList.add('show'); valid = false;
+    } else { document.getElementById('pwdErr').classList.remove('show'); }
+
+    if (password !== confirm) {
+      document.getElementById('confirmErr').classList.add('show'); valid = false;
+    } else { document.getElementById('confirmErr').classList.remove('show'); }
+
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Creando cuenta...';
+    btn.disabled = true;
+
+    const result = Auth.register({ nombre, email, password, telefono });
+
+    if (result.ok) {
+      document.getElementById('alertSuccess').textContent = '✨ ¡Cuenta creada! Redirigiendo...';
+      document.getElementById('alertSuccess').classList.add('show');
+      alertErr.classList.remove('show');
+      setTimeout(() => {
+        const redirect = new URLSearchParams(location.search).get('redirect') || 'index.html';
+        location.href = redirect;
+      }, 1200);
+    } else {
+      alertErr.textContent = result.error;
+      alertErr.classList.add('show');
+      btn.textContent = 'Crear mi cuenta';
+      btn.disabled = false;
+    }
+  });
+
+  ['nombre','email','password','confirm'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      document.getElementById(id + 'Err')?.classList.remove('show');
+    });
+  });
+</script>
+</body>
+</html>
+
+
+
+
+

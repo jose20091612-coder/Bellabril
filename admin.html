@@ -1,0 +1,606 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Bellabril</title>
+  <link rel="icon" href="assets/logo-icon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Nunito',sans-serif;background:#f5f0ff;color:#2D1B3D;min-height:100vh}
+
+    /* ── LOGIN ──────────────────────────────── */
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8416A 0%,#9B3AAA 50%,#6B35A0 100%)}
+    .login-card{background:white;border-radius:20px;padding:48px 40px;width:360px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
+    .login-card img{height:54px;margin:0 auto 22px}
+    .login-card h1{font-size:1.25rem;font-weight:800;margin-bottom:4px}
+    .login-card p{color:#9480A8;font-size:0.88rem;margin-bottom:26px}
+    .login-input{width:100%;padding:13px 16px;border:2px solid #E8D5F5;border-radius:10px;font-family:'Nunito',sans-serif;font-size:1rem;outline:none;transition:border-color .2s;margin-bottom:10px}
+    .login-input:focus{border-color:#E8416A}
+    .login-btn{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,#E8416A,#6B35A0);color:white;font-family:'Nunito',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+    .login-btn:hover{opacity:.88}
+    .login-err{color:#E8416A;font-size:.85rem;margin-top:10px;min-height:18px}
+
+    /* ── LAYOUT ─────────────────────────────── */
+    .admin-wrap{display:grid;grid-template-columns:220px 1fr;min-height:100vh}
+
+    /* ── SIDEBAR ────────────────────────────── */
+    .sidebar{background:white;border-right:1px solid #E8D5F5;display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh}
+    .sidebar-logo{height:34px;margin:0 18px 28px}
+    .sidebar a{display:flex;align-items:center;gap:10px;padding:11px 18px;font-weight:700;font-size:.88rem;color:#5C4070;cursor:pointer;transition:all .15s;text-decoration:none;border-left:3px solid transparent;user-select:none}
+    .sidebar a:hover,.sidebar a.active{color:#E8416A;background:#fff5f8;border-left-color:#E8416A}
+    .sidebar a.muted{color:#9480A8}
+    .sidebar a.muted:hover{color:#E8416A;background:#fff5f8}
+    .sidebar hr{border:none;border-top:1px solid #E8D5F5;margin:10px 0}
+
+    /* ── MAIN ───────────────────────────────── */
+    .admin-main{padding:32px;overflow-y:auto}
+
+    /* ── PAGE HEADER ────────────────────────── */
+    .ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+    .ph h2{font-size:1.45rem;font-weight:800}
+
+    /* ── STATS ──────────────────────────────── */
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+    .stat{background:white;border-radius:14px;padding:18px 20px;border:1px solid #E8D5F5}
+    .stat b{display:block;font-size:1.9rem;font-weight:800;color:#E8416A;line-height:1}
+    .stat span{font-size:.73rem;font-weight:700;color:#9480A8;text-transform:uppercase;letter-spacing:.05em;margin-top:3px;display:block}
+
+    /* ── TABLE ──────────────────────────────── */
+    .tbl-wrap{background:white;border-radius:16px;border:1px solid #E8D5F5;overflow:hidden}
+    .tbl-top{padding:14px 18px;border-bottom:1px solid #E8D5F5;display:flex;gap:10px;align-items:center}
+    .tbl-top input{flex:1;border:1.5px solid #E8D5F5;border-radius:8px;padding:9px 13px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;transition:border-color .2s}
+    .tbl-top input:focus{border-color:#E8416A}
+    .tbl-top select{border:1.5px solid #E8D5F5;border-radius:8px;padding:9px 13px;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;color:#2D1B3D;background:white;min-width:170px}
+    table{width:100%;border-collapse:collapse}
+    thead{background:#fdf8ff}
+    th{padding:11px 14px;text-align:left;font-size:.72rem;font-weight:800;color:#9480A8;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #E8D5F5}
+    td{padding:13px 14px;border-bottom:1px solid #f3eaff;font-size:.88rem;vertical-align:middle}
+    tr:last-child td{border-bottom:none}
+    tr:hover td{background:#fdf8ff}
+
+    .pi{width:42px;height:42px;object-fit:cover;border-radius:8px}
+    .pp{width:42px;height:42px;border-radius:8px;background:linear-gradient(135deg,#ffd6e4,#e8d0f7);display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+    .badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+    .bc{background:#f3eaff;color:#6B35A0}
+    .bn{background:#e8f8ec;color:#2d8a4a}
+    .bd{background:#fff4e8;color:#b06000}
+
+    /* ── BUTTONS ────────────────────────────── */
+    .btn{display:inline-flex;align-items:center;gap:5px;padding:9px 16px;border-radius:9px;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .15s;border:none;text-decoration:none;line-height:1}
+    .btn-p{background:linear-gradient(135deg,#E8416A,#6B35A0);color:white}
+    .btn-p:hover{opacity:.88;transform:translateY(-1px)}
+    .btn-o{background:transparent;color:#6B35A0;border:1.5px solid #E8D5F5}
+    .btn-o:hover{border-color:#6B35A0;background:#f5f0ff}
+    .btn-d{background:transparent;color:#dc2626;border:1.5px solid #fca5a5}
+    .btn-d:hover{background:#fef2f2}
+    .btn-g{background:transparent;color:#9480A8;border:1.5px solid #E8D5F5}
+    .btn-g:hover{border-color:#9480A8}
+    .btn-sm{padding:6px 11px;font-size:.78rem}
+    .acts{display:flex;gap:6px}
+
+    /* ── MODAL ──────────────────────────────── */
+    .overlay{position:fixed;inset:0;background:rgba(45,27,61,.48);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
+    .mbox{background:white;border-radius:20px;width:100%;max-width:540px;max-height:92vh;overflow-y:auto;padding:30px}
+    .mhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+    .mhead h3{font-size:1.15rem;font-weight:800}
+    .mclose{background:none;border:none;font-size:1.3rem;cursor:pointer;color:#9480A8;line-height:1;padding:4px}
+    .mclose:hover{color:#E8416A}
+
+    /* ── FORM ───────────────────────────────── */
+    .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px}
+    .fg.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .fg.two .fg{margin-bottom:0}
+    label.fl{font-size:.76rem;font-weight:700;color:#5C4070;text-transform:uppercase;letter-spacing:.05em}
+    .fi,.fs,.ft{border:1.5px solid #E8D5F5;border-radius:9px;padding:10px 13px;font-family:'Nunito',sans-serif;font-size:.9rem;color:#2D1B3D;outline:none;transition:border-color .2s;width:100%}
+    .fi:focus,.fs:focus,.ft:focus{border-color:#E8416A}
+    .ft{min-height:74px;resize:vertical}
+    .img-prev{width:100%;height:130px;border-radius:10px;background:linear-gradient(135deg,#ffd6e4,#e8d0f7);display:flex;align-items:center;justify-content:center;margin-top:6px;overflow:hidden;font-size:1.8rem}
+    .img-prev img{width:100%;height:100%;object-fit:cover}
+    .checks{display:flex;gap:20px;margin-top:4px}
+    .ck{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.88rem;cursor:pointer}
+    .ck input{width:17px;height:17px;accent-color:#E8416A;cursor:pointer}
+
+    /* ── EXPORT ─────────────────────────────── */
+    .exp-card{background:white;border-radius:16px;border:1px solid #E8D5F5;padding:30px;max-width:580px}
+    .exp-card h3{font-size:1.1rem;font-weight:800;margin-bottom:6px}
+    .exp-card>p{color:#5C4070;font-size:.88rem;margin-bottom:22px}
+    .steps{display:flex;flex-direction:column;gap:18px;margin-bottom:28px}
+    .step{display:flex;gap:14px}
+    .snum{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#E8416A,#6B35A0);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+    .stext h4{font-weight:700;font-size:.9rem;margin-bottom:2px}
+    .stext p{font-size:.82rem;color:#9480A8}
+    .stext code{background:#f3eaff;color:#6B35A0;padding:1px 5px;border-radius:4px;font-size:.82rem}
+    .btn-dl{background:linear-gradient(135deg,#6B35A0,#E8416A);color:white;padding:13px 26px;font-size:.95rem;border-radius:12px}
+    .btn-dl:hover{opacity:.9;transform:translateY(-1px)}
+
+    /* ── EMPTY ──────────────────────────────── */
+    .empty{padding:56px 20px;text-align:center;color:#9480A8}
+    .empty p{font-size:.95rem;margin-bottom:14px}
+
+    /* ── TOAST ──────────────────────────────── */
+    .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#2D1B3D;color:white;padding:11px 22px;border-radius:50px;font-weight:700;font-size:.88rem;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+    .toast.show{opacity:1}
+  </style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══ -->
+<div id="loginScreen" class="login-wrap">
+  <div class="login-card">
+    <img src="assets/logo.png" alt="Bellabril" onerror="this.style.display='none'">
+    <h1>Panel de administración</h1>
+    <p>Bellabril — Gestión de productos</p>
+    <input class="login-input" type="password" id="pwdInput" placeholder="Contraseña" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <p class="login-err" id="loginErr"></p>
+  </div>
+</div>
+
+<!-- ═══ PANEL ═══ -->
+<div id="adminPanel" style="display:none" class="admin-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <img src="assets/logo.png" alt="Bellabril" class="sidebar-logo" onerror="this.style.display='none'">
+    <a onclick="showView('productos')" id="snav-productos" class="active"><span>📦</span> Productos</a>
+    <a onclick="showView('export')"    id="snav-export"><span>⬇️</span> Exportar</a>
+    <hr>
+    <a href="index.html" target="_blank"><span>🏪</span> Ver tienda</a>
+    <a onclick="doLogout()" class="muted"><span>🚪</span> Cerrar sesión</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="admin-main">
+
+    <!-- VISTA: PRODUCTOS -->
+    <div id="view-productos">
+      <div class="ph">
+        <h2>Productos</h2>
+        <button class="btn btn-p" onclick="openModal()">+ Agregar producto</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><b id="sTotal">0</b><span>Total</span></div>
+        <div class="stat"><b id="sDest">0</b><span>Destacados</span></div>
+        <div class="stat"><b id="sNuev">0</b><span>Nuevos ingresos</span></div>
+        <div class="stat"><b id="sCats">0</b><span>Categorías</span></div>
+      </div>
+
+      <div class="tbl-wrap">
+        <div class="tbl-top">
+          <input type="search" placeholder="Buscar producto..." id="searchQ" oninput="renderTable()">
+          <select id="filterCat" onchange="renderTable()">
+            <option value="">Todas las categorías</option>
+            <option value="novedades">Novedades</option>
+            <option value="skincare">Skincare</option>
+            <option value="maquillaje">Maquillaje</option>
+            <option value="cabello">Cabello</option>
+            <option value="unas">Uñas</option>
+            <option value="pestanas">Pestañas y cejas</option>
+            <option value="perfumeria">Perfumería</option>
+          </select>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Img</th><th>Nombre</th><th>Precio</th>
+              <th>Categoría</th><th>Estado</th><th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div id="emptyState" class="empty" style="display:none">
+          <p>No hay productos todavía.</p>
+          <button class="btn btn-p" onclick="openModal()">+ Agregar el primero</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA: EXPORTAR -->
+    <div id="view-export" style="display:none">
+      <div class="ph"><h2>Exportar y publicar</h2></div>
+      <div class="exp-card">
+        <h3>¿Cómo actualizo la tienda?</h3>
+        <p>Cada vez que agregues o edites productos, seguí estos pasos para que los cambios se vean online.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="snum">1</div>
+            <div class="stext">
+              <h4>Descargá el archivo actualizado</h4>
+              <p>Hacé clic en el botón de abajo. Se descarga <code>products.js</code> con todos tus productos.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="snum">2</div>
+            <div class="stext">
+              <h4>Reemplazá el archivo en la carpeta</h4>
+              <p>Dentro de <code>bellabril/js/</code>, eliminá el <code>products.js</code> viejo y pegá el nuevo.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="snum">3</div>
+            <div class="stext">
+              <h4>Subí a Netlify</h4>
+              <p>Arrastrá la carpeta <code>bellabril/</code> al panel de Netlify. En segundos está online.</p>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-dl" onclick="downloadJS()">⬇️ Descargar products.js</button>
+        <p style="font-size:.78rem;color:#9480A8;margin-top:10px">Incluye <span id="expCount">0</span> productos cargados.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ═══ MODAL AGREGAR / EDITAR ═══ -->
+<div id="modal" class="overlay" style="display:none" onclick="clickOutside(event)">
+  <div class="mbox">
+    <div class="mhead">
+      <h3 id="mTitle">Agregar producto</h3>
+      <button class="mclose" onclick="closeModal()">✕</button>
+    </div>
+    <form onsubmit="saveProduct(event)">
+      <input type="hidden" id="pId">
+
+      <div class="fg two">
+        <div class="fg">
+          <label class="fl">Nombre *</label>
+          <input class="fi" id="pNombre" type="text" required placeholder="Ej: Sérum vitamina C">
+        </div>
+        <div class="fg">
+          <label class="fl">Precio ARS *</label>
+          <input class="fi" id="pPrecio" type="number" required min="0" placeholder="3500">
+        </div>
+      </div>
+
+      <div class="fg">
+        <label class="fl">Categoría *</label>
+        <select class="fs" id="pCat" required>
+          <option value="">Seleccioná...</option>
+          <option value="novedades">Novedades</option>
+          <option value="skincare">Skincare</option>
+          <option value="maquillaje">Maquillaje</option>
+          <option value="cabello">Cabello</option>
+          <option value="unas">Uñas</option>
+          <option value="pestanas">Pestañas y cejas</option>
+          <option value="perfumeria">Perfumería</option>
+        </select>
+      </div>
+
+      <div class="fg">
+        <label class="fl">URL o ruta de imagen</label>
+        <input class="fi" id="pImg" type="text" placeholder="assets/productos/crema.jpg  ó  https://..." oninput="prevImg()">
+        <div class="img-prev" id="imgPrev"><span>🖼️</span></div>
+      </div>
+
+      <div class="fg">
+        <label class="fl">Descripción</label>
+        <textarea class="ft" id="pDesc" placeholder="Describí brevemente el producto..."></textarea>
+      </div>
+
+      <div class="fg">
+        <div class="checks">
+          <label class="ck"><input type="checkbox" id="pDest"> ⭐ Destacado (inicio)</label>
+          <label class="ck"><input type="checkbox" id="pNuev"> 🆕 Nuevo ingreso</label>
+          <label class="ck"><input type="checkbox" id="pStock" checked> ✅ En stock</label>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px">
+        <button type="button" class="btn btn-g" onclick="closeModal()">Cancelar</button>
+        <button type="submit" class="btn btn-p" id="mSaveBtn">Guardar producto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+// ─── CONFIG ────────────────────────────────────
+// Cambiá esta contraseña cuando quieras
+const PWD = 'bellabril2024';
+const KEY = 'bellabril_admin_products';
+
+const CAT = {
+  novedades:'Novedades', skincare:'Skincare', maquillaje:'Maquillaje',
+  cabello:'Cabello', unas:'Uñas', pestanas:'Pestañas y cejas', perfumeria:'Perfumería',
+};
+
+// ─── AUTH ──────────────────────────────────────
+function doLogin() {
+  if (document.getElementById('pwdInput').value === PWD) {
+    sessionStorage.setItem('ba','1');
+    show();
+  } else {
+    document.getElementById('loginErr').textContent = 'Contraseña incorrecta';
+    document.getElementById('pwdInput').value = '';
+  }
+}
+document.getElementById('pwdInput').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+function doLogout() { sessionStorage.removeItem('ba'); location.reload(); }
+
+function show() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminPanel').style.display  = 'grid';
+  renderTable(); updateStats();
+}
+if (sessionStorage.getItem('ba')==='1') show();
+
+// ─── DATA ──────────────────────────────────────
+function load() {
+  try { return JSON.parse(localStorage.getItem(KEY)) || []; } catch { return []; }
+}
+function save(arr) { localStorage.setItem(KEY, JSON.stringify(arr)); }
+function nextId(arr) { return arr.length ? Math.max(...arr.map(p=>p.id))+1 : 1; }
+
+// ─── VIEWS ─────────────────────────────────────
+function showView(name) {
+  ['productos','export'].forEach(v => {
+    document.getElementById('view-'+v).style.display = v===name ? 'block' : 'none';
+    document.getElementById('snav-'+v)?.classList.toggle('active', v===name);
+  });
+  if (name==='export') document.getElementById('expCount').textContent = load().length;
+}
+
+// ─── STATS ─────────────────────────────────────
+function updateStats() {
+  const p = load();
+  document.getElementById('sTotal').textContent = p.length;
+  document.getElementById('sDest').textContent  = p.filter(x=>x.destacado).length;
+  document.getElementById('sNuev').textContent  = p.filter(x=>x.nuevo).length;
+  document.getElementById('sCats').textContent  = new Set(p.map(x=>x.categoria)).size;
+}
+
+// ─── TABLE ─────────────────────────────────────
+function renderTable() {
+  const q   = (document.getElementById('searchQ')?.value || '').toLowerCase();
+  const cat = document.getElementById('filterCat')?.value || '';
+  const arr = load().filter(p =>
+    (!q   || p.nombre.toLowerCase().includes(q) || (p.descripcion||'').toLowerCase().includes(q)) &&
+    (!cat || p.categoria === cat)
+  );
+
+  const tbody = document.getElementById('tbody');
+  document.getElementById('emptyState').style.display = arr.length ? 'none' : 'block';
+
+  tbody.innerHTML = arr.map(p => {
+    const img = p.imagen
+      ? `<img class="pi" src="${e(p.imagen)}" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="">
+         <div class="pp" style="display:none">🖼️</div>`
+      : `<div class="pp">🖼️</div>`;
+    const badges = [
+      p.nuevo     ? `<span class="badge bn">Nuevo</span>` : '',
+      p.destacado ? `<span class="badge bd">★ Dest.</span>` : '',
+    ].filter(Boolean).join(' ') || '—';
+    return `<tr>
+      <td><div style="display:flex">${img}</div></td>
+      <td><strong>${e(p.nombre)}</strong></td>
+      <td style="font-weight:700;color:#E8416A">${fmt(p.precio)}</td>
+      <td><span class="badge bc">${CAT[p.categoria]||p.categoria}</span></td>
+      <td>${badges}</td>
+      <td><div class="acts">
+        <button class="btn btn-o btn-sm" onclick="openModal(${p.id})">✏️ Editar</button>
+        <button class="btn btn-d btn-sm" onclick="del(${p.id})">🗑️</button>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─── MODAL ─────────────────────────────────────
+let editId = null;
+
+function openModal(id=null) {
+  editId = id;
+  document.getElementById('mTitle').textContent    = id ? 'Editar producto' : 'Agregar producto';
+  document.getElementById('mSaveBtn').textContent  = id ? 'Guardar cambios' : 'Guardar producto';
+  document.getElementById('pId').value = '';
+  document.getElementById('pNombre').value = '';
+  document.getElementById('pPrecio').value = '';
+  document.getElementById('pCat').value    = '';
+  document.getElementById('pImg').value    = '';
+  document.getElementById('pDesc').value   = '';
+  document.getElementById('pDest').checked  = false;
+  document.getElementById('pNuev').checked  = false;
+  document.getElementById('pStock').checked = true;
+  document.getElementById('imgPrev').innerHTML = '<span>🖼️</span>';
+
+  if (id) {
+    const p = load().find(x=>x.id===id);
+    if (p) {
+      document.getElementById('pId').value    = p.id;
+      document.getElementById('pNombre').value= p.nombre;
+      document.getElementById('pPrecio').value= p.precio;
+      document.getElementById('pCat').value   = p.categoria;
+      document.getElementById('pImg').value   = p.imagen||'';
+      document.getElementById('pDesc').value  = p.descripcion||'';
+      document.getElementById('pDest').checked = !!p.destacado;
+      document.getElementById('pNuev').checked = !!p.nuevo;
+      document.getElementById('pStock').checked = p.stock !== false;
+      prevImg();
+    }
+  }
+  document.getElementById('modal').style.display = 'flex';
+  document.getElementById('pNombre').focus();
+}
+
+function closeModal() { document.getElementById('modal').style.display = 'none'; }
+function clickOutside(e) { if(e.target===document.getElementById('modal')) closeModal(); }
+
+function saveProduct(e) {
+  e.preventDefault();
+  const arr = load();
+  const data = {
+    id:          editId || nextId(arr),
+    nombre:      document.getElementById('pNombre').value.trim(),
+    precio:      Number(document.getElementById('pPrecio').value),
+    categoria:   document.getElementById('pCat').value,
+    imagen:      document.getElementById('pImg').value.trim(),
+    descripcion: document.getElementById('pDesc').value.trim(),
+    destacado:   document.getElementById('pDest').checked,
+    nuevo:       document.getElementById('pNuev').checked,
+    stock:       document.getElementById('pStock').checked,
+  };
+  save(editId ? arr.map(p=>p.id===editId?data:p) : [...arr,data]);
+  closeModal(); renderTable(); updateStats();
+  toast(editId ? '✓ Producto actualizado' : '✓ Producto agregado');
+}
+
+function del(id) {
+  const p = load().find(x=>x.id===id);
+  if (!p || !confirm(`¿Eliminar "${p.nombre}"?`)) return;
+  save(load().filter(x=>x.id!==id));
+  renderTable(); updateStats();
+  toast('Producto eliminado');
+}
+
+// ─── IMAGE PREVIEW ─────────────────────────────
+function prevImg() {
+  const url = document.getElementById('pImg').value.trim();
+  const el  = document.getElementById('imgPrev');
+  el.innerHTML = url
+    ? `<img src="${url}" onerror="this.parentElement.innerHTML='<span>🖼️</span>'" alt="">`
+    : '<span>🖼️</span>';
+}
+
+// ─── EXPORT ────────────────────────────────────
+function downloadJS() {
+  const arr = load();
+  const blob = new Blob([buildJS(arr)], {type:'text/javascript'});
+  const a = Object.assign(document.createElement('a'), {href:URL.createObjectURL(blob), download:'products.js'});
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('Descargando products.js...');
+}
+
+function buildJS(arr) {
+  const rows = arr.map(p=>`  {
+    id: ${p.id},
+    nombre: ${JSON.stringify(p.nombre)},
+    precio: ${p.precio},
+    categoria: ${JSON.stringify(p.categoria)},
+    imagen: ${JSON.stringify(p.imagen||'')},
+    descripcion: ${JSON.stringify(p.descripcion||'')},
+    nuevo: ${!!p.nuevo},
+    destacado: ${!!p.destacado},
+    stock: ${p.stock !== false},
+  }`).join(',\n');
+  return `/* ================================================================
+   BELLABRIL — Catálogo de Productos
+   Generado desde el panel de administración
+   Categorías: novedades | skincare | maquillaje | cabello | unas | pestanas | perfumeria
+================================================================ */
+
+const CATEGORIAS = [
+  { id: 'todos',       nombre: 'Todos',             icono: '🌸' },
+  { id: 'novedades',   nombre: 'Novedades',          icono: '✨' },
+  { id: 'skincare',    nombre: 'Skincare',            icono: '🧴' },
+  { id: 'maquillaje',  nombre: 'Maquillaje',          icono: '💄' },
+  { id: 'cabello',     nombre: 'Cabello',             icono: '✂️' },
+  { id: 'unas',        nombre: 'Uñas',               icono: '💅' },
+  { id: 'pestanas',    nombre: 'Pestañas y cejas',   icono: '👁️' },
+  { id: 'perfumeria',  nombre: 'Perfumería',          icono: '🌸' },
+];
+
+const PRODUCTS = [
+${rows}
+];
+
+/* ================================================================
+   RENDERIZADO — no modificar lo de abajo
+================================================================ */
+
+function _cardHTML(p) {
+  const badge = !p.stock
+    ? '<span class="product-card__badge badge-agotado">Sin stock</span>'
+    : p.nuevo
+      ? '<span class="product-card__badge badge-nuevo">Nuevo ✦</span>'
+      : '';
+
+  const btn = !p.stock
+    ? '<button class="btn btn-outline btn-sm product-card__add" disabled>Sin stock</button>'
+    : \`<button class="btn btn-primary btn-sm product-card__add" onclick="addToCart(\${p.id})">Agregar al carrito</button>\`;
+
+  return \`
+    <article class="product-card reveal">
+      <div class="product-card__image">
+        \${badge}
+        <img src="\${p.imagen}" alt="\${p.nombre}" loading="lazy" onerror="this.style.opacity=0">
+      </div>
+      <div class="product-card__body">
+        <h3 class="product-card__name">\${p.nombre}</h3>
+        <p class="product-card__desc">\${p.descripcion}</p>
+        <p class="product-card__price">\${Cart.formatPrice(p.precio)}</p>
+        \${btn}
+      </div>
+    </article>\`;
+}
+
+function addToCart(id) {
+  const p = PRODUCTS.find(x => x.id === id);
+  if (p && p.stock) Cart.add(p);
+}
+
+function renderProducts(containerId, filter = 'todos', limit = null) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  let list = filter === 'todos' ? PRODUCTS : PRODUCTS.filter(p => p.categoria === filter);
+  if (limit) list = list.slice(0, limit);
+  el.innerHTML = list.length
+    ? list.map(_cardHTML).join('')
+    : '<p style="text-align:center;color:var(--text-light);padding:48px;grid-column:1/-1">No hay productos en esta categoría todavía.</p>';
+  _reveal(el);
+}
+
+function renderDestacados(containerId, max = 6) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const list = PRODUCTS.filter(p => p.destacado && p.stock !== false).slice(0, max);
+  el.innerHTML = list.map(_cardHTML).join('');
+  _reveal(el);
+}
+
+function renderNuevos(containerId, max = 4) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  const list = PRODUCTS.filter(p => p.nuevo).slice(0, max);
+  el.innerHTML = list.map(_cardHTML).join('');
+  _reveal(el);
+}
+
+function _reveal(parent) {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 75);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  parent.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+function initReveal() { _reveal(document); }
+`;
+}
+
+// ─── HELPERS ───────────────────────────────────
+function fmt(n) {
+  return new Intl.NumberFormat('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0}).format(n);
+}
+function e(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2500);
+}
+</script>
+</body>
+</html>
+
+
+

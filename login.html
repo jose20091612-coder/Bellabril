@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión — Bellabril</title>
+  <link rel="icon" href="assets/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    body { background: var(--bg-light); }
+    .top-bar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px; background: white; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+    }
+    .top-bar img { height: 38px; }
+    .top-bar a { font-size: 0.85rem; font-weight: 700; color: var(--purple); }
+    .top-bar a:hover { color: var(--pink); }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html"><img src="assets/logo.png" alt="Bellabril"></a>
+  <a href="index.html">← Volver a la tienda</a>
+</div>
+
+<main class="auth-page" style="padding-top:100px">
+  <div class="auth-card">
+
+    <div class="auth-logo">
+      <img src="assets/logo.png" alt="Bellabril">
+    </div>
+
+    <h1 class="auth-title">Iniciar sesión</h1>
+    <p class="auth-subtitle">Bienvenida de vuelta 🌸</p>
+
+    <div class="alert-error" id="alertError"></div>
+
+    <form id="loginForm" novalidate>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email</label>
+        <input class="form-input" type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email">
+        <p class="field-error" id="emailErr">Ingresá un email válido.</p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Contraseña</label>
+        <div class="password-wrap">
+          <input class="form-input" type="password" id="password" name="password" required placeholder="Tu contraseña" autocomplete="current-password">
+          <button type="button" class="toggle-pwd" onclick="togglePwd('password', this)" aria-label="Ver contraseña">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+        <p class="field-error" id="pwdErr">Ingresá tu contraseña.</p>
+      </div>
+
+      <div class="remember-row">
+        <label>
+          <input type="checkbox" id="remember"> Recordarme
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Iniciar sesión</button>
+
+    </form>
+
+    <div class="auth-divider"><span>¿No tenés cuenta?</span></div>
+
+    <a href="registro.html" class="btn btn-outline btn-full">Crear cuenta gratis</a>
+
+    <p class="auth-footer" style="margin-top:16px">
+      Al continuar aceptás nuestros términos y políticas de privacidad.
+    </p>
+
+  </div>
+</main>
+
+<script src="js/auth.js"></script>
+<script>
+  // Si ya está logueado, redirigir
+  if (Auth.isLoggedIn()) location.href = 'index.html';
+
+  function togglePwd(id, btn) {
+    const input = document.getElementById(id);
+    input.type = input.type === 'password' ? 'text' : 'password';
+  }
+
+  document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const remember = document.getElementById('remember').checked;
+    const alertEl  = document.getElementById('alertError');
+
+    // Validación básica
+    let valid = true;
+    if (!email || !email.includes('@')) {
+      document.getElementById('emailErr').classList.add('show'); valid = false;
+    } else {
+      document.getElementById('emailErr').classList.remove('show');
+    }
+    if (!password) {
+      document.getElementById('pwdErr').classList.add('show'); valid = false;
+    } else {
+      document.getElementById('pwdErr').classList.remove('show');
+    }
+    if (!valid) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Ingresando...';
+    btn.disabled = true;
+
+    const result = Auth.login(email, password, remember);
+
+    if (result.ok) {
+      // Redirigir al origen o al home
+      const redirect = new URLSearchParams(location.search).get('redirect') || 'index.html';
+      location.href = redirect;
+    } else {
+      alertEl.textContent = result.error;
+      alertEl.classList.add('show');
+      btn.textContent = 'Iniciar sesión';
+      btn.disabled = false;
+    }
+  });
+
+  // Limpiar errores al escribir
+  document.getElementById('email').addEventListener('input',    () => document.getElementById('emailErr').classList.remove('show'));
+  document.getElementById('password').addEventListener('input', () => document.getElementById('pwdErr').classList.remove('show'));
+</script>
+</body>
+</html>
+
+
+
+
+

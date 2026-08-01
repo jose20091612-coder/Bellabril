@@ -1,0 +1,211 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto — Bellabril</title>
+  <meta name="description" content="Contactá a Bellabril por WhatsApp, email o Instagram. Respondemos todas tus consultas.">
+  <link rel="icon" href="assets/logo-icon.png" type="image/png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="container">
+    <div class="header__main">
+      <div class="header-search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="¿Qué estás buscando?" id="searchInput" autocomplete="off">
+      </div>
+      <a href="index.html" class="logo"><img src="assets/logo.png" alt="Bellabril"></a>
+      <div class="header__actions">
+        <div id="userBtn"></div>
+        <a href="carrito.html" class="cart-btn" aria-label="Carrito">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="cats-bar">
+<div class="cats-bar__inner" id="navItems">
+      <a href="index.html"                    class="cat-link">Inicio</a>
+      <a href="nosotros.html"                 class="cat-link">Quiénes somos</a>
+      <a href="productos.html?cat=novedades"  class="cat-link">Novedades</a>
+      <a href="productos.html?cat=skincare"   class="cat-link">Skincare</a>
+      <a href="productos.html?cat=maquillaje" class="cat-link">Maquillaje</a>
+      <a href="productos.html?cat=cabello"    class="cat-link">Cabello</a>
+      <a href="productos.html?cat=unas"       class="cat-link">Uñas</a>
+      <a href="productos.html?cat=pestanas"   class="cat-link">Pestañas y cejas</a>
+      <a href="productos.html?cat=perfumeria" class="cat-link">Perfumería</a>
+      <a href="marcas.html"                   class="cat-link">Marcas</a>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE HEADER -->
+<div class="page-header" style="padding-top:calc(var(--header-h) + var(--cats-h) + 40px)">
+  <div class="container">
+    <h1>Contactos</h1>
+    <p>Respondemos rápido</p>
+  </div>
+</div>
+
+<main class="contact-page">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- INFO -->
+      <div class="contact-info reveal">
+        <h2>¿Tenés alguna consulta?</h2>
+        <p>¿Consultas sobre productos o tu pedido? Escribinos por WhatsApp y te respondemos al toque. Para devoluciones, reclamos o problemas con tu compra, escribinos por email y lo resolvemos a la brevedad.</p>
+
+        <!-- WhatsApp -->
+        <div class="contact-item">
+          <div class="contact-item__icon">💬</div>
+          <div>
+            <p class="contact-item__label">Consultar por WhatsApp</p>
+            <a href="https://wa.me/5491126971330" target="_blank" rel="noopener" class="contact-item__value" style="color:var(--purple)">
+              +54 9 11 2697-1330
+            </a>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-item">
+          <div class="contact-item__icon">📧</div>
+          <div>
+            <p class="contact-item__label">Devoluciones y reclamos</p>
+            <a href="mailto:kronovisual@gmail.com" class="contact-item__value" style="color:var(--purple)">
+              kronovisual@gmail.com
+            </a>
+          </div>
+        </div>
+
+        <!-- Instagram -->
+        <div class="contact-item">
+          <div class="contact-item__icon">📸</div>
+          <div>
+            <p class="contact-item__label">Instagram</p>
+            <a href="https://www.instagram.com/bellabril.ba" target="_blank" rel="noopener" class="contact-item__value" style="color:var(--purple)">
+              @bellabril.ba
+            </a>
+          </div>
+        </div>
+
+        <!-- Horario -->
+        <div class="contact-item">
+          <div class="contact-item__icon">🕐</div>
+          <div>
+            <p class="contact-item__label">Horario de atención</p>
+            <!-- REVISAR: reemplazá con el horario real -->
+            <p class="contact-item__value">Lunes a Sábado · 9 a 21 hs</p>
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- FORMULARIO -->
+      <div class="contact-form-card reveal">
+        <h3>Envianos un mensaje</h3>
+        <form onsubmit="onContactSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="cNombre">Nombre *</label>
+              <input class="form-input" type="text" id="cNombre" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="cTel">Teléfono</label>
+              <input class="form-input" type="tel" id="cTel" placeholder="Tu teléfono">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cEmail">Email *</label>
+            <input class="form-input" type="email" id="cEmail" required placeholder="tu@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cMensaje">Mensaje *</label>
+            <textarea class="form-input" id="cMensaje" rows="4" required placeholder="¿En qué te podemos ayudar?"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Enviar por Email</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- Onda animada → Footer -->
+<div class="wave-anim-wrap" aria-hidden="true">
+  <div class="wave-anim-layer wave-anim-layer--back">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,45 C180,90 360,0 540,45 C720,90 900,0 1080,45 C1260,90 1440,0 1440,45 L1440,90 L0,90 Z" fill="#4E2478"/>
+    </svg>
+  </div>
+  <div class="wave-anim-layer wave-anim-layer--front">
+    <svg viewBox="0 0 1440 90" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,55 C240,10 480,90 720,50 C960,10 1200,80 1440,45 L1440,90 L0,90 Z" fill="#2D1B3D"/>
+    </svg>
+  </div>
+</div>
+<footer class="footer" style="margin-top:80px">
+  <div class="container">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__logo"><img src="assets/logo-icon.png" style="height:48px;width:auto"></div>
+        <p class="footer__tagline">Insumos profesionales para nail art.<br>Calidad y variedad para que tus creaciones brillen.</p>
+      </div>
+      <div>
+        <p class="footer__title">Ayuda</p>
+        <div class="footer__links">
+          <a href="#" class="footer__link">Preguntas Frecuentes</a>
+          <a href="#" class="footer__link">Cómo Comprar</a>
+          <a href="#" class="footer__link">Política de Devolución</a>
+          <a href="contacto.html" class="footer__link">Contacto</a>
+        </div>
+      </div></div>
+    <div class="footer__bottom"><p>© 2024 Bellabril — Renace Tu Belleza. Todos los derechos reservados.</p></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5491126971330" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+<div id="toast" class="toast"></div>
+
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/main.js"></script>
+<script>
+function onContactSubmit(e) {
+  e.preventDefault();
+  const nombre  = document.getElementById('cNombre').value.trim();
+  const tel     = document.getElementById('cTel').value.trim();
+  const email   = document.getElementById('cEmail').value.trim();
+  const mensaje = document.getElementById('cMensaje').value.trim();
+  const subject = encodeURIComponent(`Consulta de ${nombre} — Bellabril`);
+  const body = encodeURIComponent(
+    `Nombre: ${nombre}\nEmail: ${email}` + (tel ? `\nTeléfono: ${tel}` : '') + `\n\n${mensaje}`
+  );
+  window.location.href = `mailto:kronovisual@gmail.com?subject=${subject}&body=${body}`;
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
