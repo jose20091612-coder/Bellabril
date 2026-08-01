@@ -525,13 +525,15 @@ function _cardHTML(p) {
 
   return \`
     <article class="product-card reveal">
-      <div class="product-card__image">
+      <a href="producto-detalle.html?id=\${p.id}" class="product-card__image">
         \${badge}
         <img src="\${p.imagen}" alt="\${p.nombre}" loading="lazy" onerror="this.style.opacity=0">
-      </div>
+      </a>
       <div class="product-card__body">
-        <h3 class="product-card__name">\${p.nombre}</h3>
-        <p class="product-card__desc">\${p.descripcion}</p>
+        <a href="producto-detalle.html?id=\${p.id}" class="product-card__titlelink">
+          <h3 class="product-card__name">\${p.nombre}</h3>
+          <p class="product-card__desc">\${p.descripcion}</p>
+        </a>
         <p class="product-card__price">\${Cart.formatPrice(p.precio)}</p>
         \${btn}
       </div>

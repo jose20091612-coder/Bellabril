@@ -98,6 +98,13 @@ const PRODUCTS = [
     categoria:   "cabello",
     imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite.jpg",
     descripcion: "Crema extra ácida de la línea Color Care System de Fidelité, formulada con D-Panthenol para sellar la fibra capilar luego de la coloración. Ayuda a cerrar la cutícula del cabello, cuidando el color y dejándolo con mejor aspecto después del proceso químico.",
+    caracteristicas: [
+      "Sella la fibra capilar post-coloración",
+      "Fórmula con D-Panthenol",
+      "Línea profesional Fidelité — Color Care System",
+      "Contenido neto: 270g / 9.52 oz",
+      "pH ácido, ideal como paso final de coloración"
+    ],
     nuevo:       false,
     destacado:   false,
     stock:       true
@@ -109,6 +116,13 @@ const PRODUCTS = [
     categoria:   "cabello",
     imagen:      "assets/productos/cabello/shampoo-mythical-argan-fidelite.jpg",
     descripcion: "Shampoo profesional de la línea Mythical de Fidelité, formulado con aceite virgen de argán y filtro UV. Limpia suavemente mientras nutre el cabello, dejándolo con brillo y suavidad.",
+    caracteristicas: [
+      "Formulado con aceite virgen de argán",
+      "Filtro UV para proteger el color",
+      "Línea profesional Fidelité",
+      "Contenido: 260ml / 8.79 fl oz",
+      "Ideal para usar junto al acondicionador de la misma línea"
+    ],
     nuevo:       false,
     destacado:   true,
     stock:       true
@@ -120,8 +134,70 @@ const PRODUCTS = [
     categoria:   "cabello",
     imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite.jpg",
     descripcion: "Acondicionador profesional de la línea Mythical de Fidelité, con aceite virgen de argán y filtro UV. Facilita el desenredado y deja el cabello suave, hidratado y con brillo.",
+    caracteristicas: [
+      "Formulado con aceite virgen de argán",
+      "Filtro UV para proteger el color",
+      "Línea profesional Fidelité",
+      "Contenido: 260ml / 8.79 fl oz",
+      "Complementa el shampoo de la misma línea"
+    ],
     nuevo:       false,
     destacado:   true,
+    stock:       true
+  },
+  {
+    id: 10,
+    nombre:      "Ampolla Capilar Linen Seed — Fidelité",
+    precio:      2000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 11,
+    nombre:      "Ampolla Capilar 100% Free — Fidelité",
+    precio:      2000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 12,
+    nombre:      "Ampolla Capilar Caviar — Fidelité",
+    precio:      2000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 13,
+    nombre:      "Ampolla Capilar Argán — Fidelité",
+    precio:      2000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    descripcion: "Ampolla capilar de la línea Fidelité con complejo de argán, que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    nuevo:       false,
+    destacado:   false,
+    stock:       true
+  },
+  {
+    id: 14,
+    nombre:      "Ampolla Capilar Instant Nourishing Complex — Fidelité",
+    precio:      2000,
+    categoria:   "cabello",
+    imagen:      "assets/productos/cabello/ampollas-varias.jpeg",
+    descripcion: "Ampolla capilar de la línea Fidelité que aporta brillo, nutrición y revitaliza el cabello en cada aplicación.",
+    nuevo:       false,
+    destacado:   false,
     stock:       true
   },
 ];
@@ -143,13 +219,15 @@ function _cardHTML(p) {
 
   return `
     <article class="product-card reveal">
-      <div class="product-card__image">
+      <a href="producto-detalle.html?id=${p.id}" class="product-card__image">
         ${badge}
         <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" onerror="this.style.opacity=0">
-      </div>
+      </a>
       <div class="product-card__body">
-        <h3 class="product-card__name">${p.nombre}</h3>
-        <p class="product-card__desc">${p.descripcion}</p>
+        <a href="producto-detalle.html?id=${p.id}" class="product-card__titlelink">
+          <h3 class="product-card__name">${p.nombre}</h3>
+          <p class="product-card__desc">${p.descripcion}</p>
+        </a>
         <p class="product-card__price">${Cart.formatPrice(p.precio)}</p>
         ${btn}
       </div>
