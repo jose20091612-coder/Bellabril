@@ -197,7 +197,7 @@ ul    { list-style: none; }
   aspect-ratio: 1; overflow: hidden; background: var(--bg-light); position: relative; display: block;
 }
 .product-card__image img {
-  width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;
+  width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease;
 }
 .product-card:hover .product-card__image img { transform: scale(1.08); }
 .product-card__titlelink { display: block; }
@@ -634,7 +634,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
 .pd-breadcrumb a:hover { color: var(--purple); }
 .pd-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
 .pd-image-wrap { position: relative; border-radius: var(--radius); overflow: hidden; background: var(--bg-light); aspect-ratio: 1; }
-.pd-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pd-image { width: 100%; height: 100%; object-fit: contain; display: block; }
 .pd-badge { position: absolute; top: 14px; left: 14px; }
 .pd-cat { display: inline-block; font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--pink); margin-bottom: 10px; }
 .pd-name { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--text); line-height: 1.2; margin-bottom: 14px; }
