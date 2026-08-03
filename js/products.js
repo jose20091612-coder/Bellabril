@@ -96,7 +96,7 @@ const PRODUCTS = [
     nombre:      "Crema Extra Ácida Colormaster — Fidelité",
     precio:      5500,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite-5500.jpg",
+    imagen:      "assets/productos/cabello/colormaster-crema-extra-acida-fidelite-5.500.jpg",
     descripcion: "Crema extra ácida de la línea Color Care System de Fidelité, formulada con D-Panthenol para sellar la fibra capilar luego de la coloración. Ayuda a cerrar la cutícula del cabello, cuidando el color y dejándolo con mejor aspecto después del proceso químico.",
     caracteristicas: [
       "Sella la fibra capilar post-coloración",
@@ -132,7 +132,7 @@ const PRODUCTS = [
     nombre:      "Acondicionador Mythical Argán — Fidelité",
     precio:      8000,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite-8000.jpg",
+    imagen:      "assets/productos/cabello/acondicionador-mythical-argan-fidelite-8.000.jpg",
     descripcion: "Acondicionador profesional de la línea Mythical de Fidelité, con aceite virgen de argán y filtro UV. Facilita el desenredado y deja el cabello suave, hidratado y con brillo.",
     caracteristicas: [
       "Formulado con aceite virgen de argán",
@@ -150,7 +150,7 @@ const PRODUCTS = [
     nombre:      "Ampollas Capilares — Fidelité",
     precio:      2000,
     categoria:   "cabello",
-    imagen:      "assets/productos/cabello/ampollas-varias-2000.jpeg",
+    imagen:      "assets/productos/cabello/ampollas-varias-2.000.jpeg",
     descripcion: "Ampollas capilares de la línea Fidelité. Aportan brillo, nutrición y revitalizan el cabello en cada aplicación. Disponibles en 5 variantes según lo que necesite tu cabello.",
     caracteristicas: [
       "Linen Seed: ayuda a disciplinar y suavizar el cabello, aportando brillo y controlando el frizz",
